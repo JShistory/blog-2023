@@ -63,11 +63,9 @@ function katexPlugin() {
   const toHTMLRenderers = {
     katex(node) {
       console.log("HI");
-
       let html = katex.renderToString(node.literal, {
         throwOnError: false
       });
-
       return [
         { type: "openTag", tagName: "div", outerNewLine: true },
         { type: "html", content: html },
@@ -75,27 +73,27 @@ function katexPlugin() {
       ];
     }
   };
-
   return { toHTMLRenderers };
 }
 
 
 const viewer1MarkdownSource = "로딩중...";
 
-const viewer1 = Editor.factory({
-  el: document.querySelector("#viewer-1"),
-  viewer: true,
-  initialValue: viewer1MarkdownSource,
-  plugins: [
-    [toastui.Editor.plugin.codeSyntaxHighlight, { highlighter: Prism }],
-    katexPlugin,
-    [
-      toastui.Editor.plugin.uml,
-      { rendererURL: "http://www.plantuml.com/plantuml/svg/" }
-    ]
-  ]
-});
-function showPage(pageNo) {
+    const viewer1 = Editor.factory({
+      el: document.querySelector("#viewer-1"),
+      viewer: true,
+      initialValue: viewer1MarkdownSource,
+      plugins: [
+        [toastui.Editor.plugin.codeSyntaxHighlight, { highlighter: Prism }],
+        katexPlugin,
+        [
+          toastui.Editor.plugin.uml,
+          { rendererURL: "http://www.plantuml.com/plantuml/svg/" }
+        ]
+      ]
+    });
+
+    function showPage(pageNo) {
       fetch(pageNo + ".md")
         .then(response => response.text()) // 응답에서 본문만 취한다.
         .then(text => {
@@ -108,9 +106,6 @@ function showPage(pageNo) {
         })
     }
 
-      </script>
+  </script>
+
 </body>
-</html>
-
-
-
